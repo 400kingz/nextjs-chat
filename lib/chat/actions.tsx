@@ -126,8 +126,13 @@ async function submitUserMessage(content: string) {
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>
   let textNode: undefined | React.ReactNode
 
+  const ollama = createOllama({
+  modelID: 'deepseek-v2:16b',
+  provider: 'ollama-ai-provider',
+  });
+
   const result = await streamUI({
-    model: createOllama('deepseek-v2:16b'),
+    model: ollama('deepseek-v2:16b'),
     initial: <SpinnerMessage />,
     system: `\
     You are a stock trading conversation bot and you can help users buy stocks, step by step.
